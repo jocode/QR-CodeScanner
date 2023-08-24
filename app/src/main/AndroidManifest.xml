@@ -34,7 +34,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.QRCodeScanner"></activity>
+            android:theme="@style/Theme.QRCodeScanner" />
 
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"

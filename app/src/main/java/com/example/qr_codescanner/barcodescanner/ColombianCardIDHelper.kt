@@ -44,7 +44,7 @@ internal fun eraseFirstZeroNumbers(idNumber: String): String {
  * @return A cleaned string with only single spaces between words and no leading/trailing spaces.
  */
 internal fun splitWordsWithLongSpaces(stringWithLongSpaces: String): String {
-    return stringWithLongSpaces.replace("\\s{2,}".toRegex(), "#")
+    return stringWithLongSpaces.replace("\\s{2,}".toRegex(), " ").trim()
 }
 
 

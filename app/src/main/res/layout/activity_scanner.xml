@@ -7,14 +7,35 @@
     tools:context=".barcodescanner.ScannerActivity">
 
     <Button
-        android:id="@+id/btnScan"
+        android:id="@+id/btnBarcodeScanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scanner"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Barcode Scanner PDF417"
+        app:layout_constraintBottom_toTopOf="@+id/btnQRScanner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnQRScanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR Scanner"
+        app:layout_constraintBottom_toTopOf="@+id/btnGeneralScanner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBarcodeScanner" />
+
+    <Button
+        android:id="@+id/btnGeneralScanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="General code Scanner"
+        app:layout_constraintBottom_toTopOf="@+id/tvResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnQRScanner" />
+
 
     <TextView
         android:id="@+id/tvResult"
@@ -24,6 +45,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnScan" />
+        app:layout_constraintTop_toBottomOf="@+id/btnGeneralScanner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

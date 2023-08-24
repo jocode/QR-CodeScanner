@@ -1,12 +1,12 @@
 package com.example.qr_codescanner.barcodescanner
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.qr_codescanner.R
+import com.example.qr_codescanner.MainActivity
+import com.example.qr_codescanner.databinding.ActivityScannerBinding
 import com.google.zxing.client.android.Intents
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
@@ -16,6 +16,7 @@ import com.journeyapps.barcodescanner.ScanOptions
 class ScannerActivity : AppCompatActivity() {
 
     private var scanResults = ""
+    private lateinit var binding: ActivityScannerBinding
 
     private val barcodeLauncher = registerForActivityResult(
         ScanContract()
@@ -45,23 +46,38 @@ class ScannerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scanner)
+        binding = ActivityScannerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setupViews()
 
     }
 
 
-    private fun setupViews() {
-        val scanButton = findViewById<View>(R.id.btnScan)
-        scanButton.setOnClickListener { onButtonClick() }
+    private fun setupViews() = with(binding) {
+        btnBarcodeScanner.setOnClickListener { onButtonClick() }
+
+        btnQRScanner.setOnClickListener {
+            startActivity(
+                Intent(this@ScannerActivity, MainActivity::class.java)
+            )
+        }
+
+        btnGeneralScanner.setOnClickListener {
+            scanMixedBarcodes()
+        }
+
     }
 
     private fun updateView() {
-        val tvResult = findViewById<TextView>(R.id.tvResult)
-        val formattedValues = parseBarcodeValues(scanResults)
-        tvResult.text = formattedValues.toString()
         Log.e("Scanned", scanResults)
+
+        try {
+            val formattedValues = parseBarcodeValues(scanResults)
+            binding.tvResult.text = formattedValues.toString()
+        } catch (e: Exception) {
+            binding.tvResult.text = scanResults
+        }
     }
 
     /**
@@ -98,7 +114,7 @@ class ScannerActivity : AppCompatActivity() {
     /**
      * Launch the scan activity with mixed scan enabled.
      */
-    fun scanMixedBarcodes() {
+    private fun scanMixedBarcodes() {
         val options = ScanOptions()
         options.addExtra(Intents.Scan.SCAN_TYPE, Intents.Scan.MIXED_SCAN)
         barcodeLauncher.launch(options)
