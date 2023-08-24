@@ -43,8 +43,7 @@ class QrCodeAnalyzer(
                     setHints(
                         mapOf(
                             DecodeHintType.POSSIBLE_FORMATS to arrayListOf(
-                                BarcodeFormat.QR_CODE,
-                                BarcodeFormat.CODE_128,
+                                BarcodeFormat.QR_CODE
                             )
                         )
                     )
